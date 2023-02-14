@@ -94,10 +94,9 @@ public class Main {
     private static void task8() throws IOException {
         List<Animal> animals = Util.getAnimals();
         animals.stream()
-                .map(Animal::getBread)
-                .map(String::toCharArray)
-                .min(Comparator.comparingInt(chars -> chars.length))
-                .ifPresent(shortestChar -> System.out.println(shortestChar.length));
+                .sorted(Comparator.comparing(Animal::getBread))
+                .limit(100)
+                .forEach(System.out::println);
     }
 
     private static void task9() throws IOException {
