@@ -155,26 +155,26 @@ public class Main {
 
     private static void task13() throws IOException {
         List<House> houses = new ArrayList<>(Util.getHouses());
-        List<Person> personList = new ArrayList<>();
+        List<Person> people = new ArrayList<>();
 
         houses.stream()
                 .filter(house -> house.getBuildingType().equals("Hospital"))
                 .flatMap(house -> house.getPersonList().stream())
-                .forEach(personList::add);
+                .forEach(people::add);
 
         houses.stream()
                 .filter(house -> !house.getBuildingType().equals("Hospital"))
                 .flatMap(house -> house.getPersonList().stream())
                 .filter(isAgelessThan18.or(isRetiredWomen).or(isRetiredMan))
-                .forEach(personList::add);
+                .forEach(people::add);
 
         houses.stream()
                 .filter(house -> !house.getBuildingType().equals("Hospital"))
                 .flatMap(house -> house.getPersonList().stream())
                 .filter(others)
-                .forEach(personList::add);
+                .forEach(people::add);
 
-        personList.stream()
+        people.stream()
                 .limit(500)
                 .forEach(System.out::println);
     }
