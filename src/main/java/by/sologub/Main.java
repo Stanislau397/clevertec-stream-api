@@ -70,12 +70,14 @@ public class Main {
 
     private static void task5() throws IOException {
         List<Animal> animals = Util.getAnimals();
-        //        animals.stream() Продолжить ...
+        boolean anyHungarians = animals.stream()
+                .filter(animal -> animal.getAge() >= 20 && animal.getAge() <= 30)
+                .anyMatch(animal -> "Hungarian".equals(animal.getOrigin()));
+        System.out.println(anyHungarians);
     }
 
     private static void task6() throws IOException {
-        List<Animal> animals = Util.getAnimals();
-        //        animals.stream() Продолжить ...
+
     }
 
     private static void task7() throws IOException {
