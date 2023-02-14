@@ -8,11 +8,16 @@ import by.sologub.model.Person;
 import by.sologub.util.Util;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
 import static by.sologub.validator.PersonValidator.isAgeGreaterOrEqual18;
 import static by.sologub.validator.PersonValidator.isAgeLessOrEqual27;
+import static by.sologub.validator.PersonValidator.isAgelessThan18;
+import static by.sologub.validator.PersonValidator.isRetiredMan;
+import static by.sologub.validator.PersonValidator.isRetiredWomen;
+import static by.sologub.validator.PersonValidator.others;
 
 public class Main {
     public static void main(String[] args) throws IOException {
@@ -139,8 +144,29 @@ public class Main {
     }
 
     private static void task13() throws IOException {
-        List<House> houses = Util.getHouses();
-        //        Продолжить...
+        List<House> houses = new ArrayList<>(Util.getHouses());
+        List<Person> personList = new ArrayList<>();
+
+        houses.stream()
+                .filter(house -> house.getBuildingType().equals("Hospital"))
+                .flatMap(house -> house.getPersonList().stream())
+                .forEach(personList::add);
+
+        houses.stream()
+                .filter(house -> !house.getBuildingType().equals("Hospital"))
+                .flatMap(house -> house.getPersonList().stream())
+                .filter(isAgelessThan18.or(isRetiredWomen).or(isRetiredMan))
+                .forEach(personList::add);
+
+        houses.stream()
+                .filter(house -> !house.getBuildingType().equals("Hospital"))
+                .flatMap(house -> house.getPersonList().stream())
+                .filter(others)
+                .forEach(personList::add);
+
+        personList.stream()
+                .limit(500)
+                .forEach(System.out::println);
     }
 
     private static void task14() throws IOException {
