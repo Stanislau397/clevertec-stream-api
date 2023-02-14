@@ -110,7 +110,10 @@ public class Main {
 
     private static void task10() throws IOException {
         List<Animal> animals = Util.getAnimals();
-        //        animals.stream() Продолжить ...
+        long animalsAge = animals.stream()
+                .mapToInt(Animal::getAge)
+                .sum();
+        System.out.println(animalsAge);
     }
 
     private static void task11() throws IOException {
