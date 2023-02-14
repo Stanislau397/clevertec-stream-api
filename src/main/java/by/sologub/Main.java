@@ -11,6 +11,9 @@ import java.io.IOException;
 import java.util.Comparator;
 import java.util.List;
 
+import static by.sologub.validator.PersonValidator.isAgeGreaterOrEqual18;
+import static by.sologub.validator.PersonValidator.isAgeLessOrEqual27;
+
 public class Main {
     public static void main(String[] args) throws IOException {
         task1();
@@ -127,7 +130,12 @@ public class Main {
 
     private static void task12() throws IOException {
         List<Person> people = Util.getPersons();
-//        Продолжить...
+        people.stream()
+                .filter(person -> "Male".equals(person.getGender()))
+                .filter(person -> isAgeGreaterOrEqual18.or(isAgeLessOrEqual27).test(person))
+                .sorted(Comparator.comparingInt(Person::getRecruitmentGroup))
+                .limit(200)
+                .forEach(System.out::println);
     }
 
     private static void task13() throws IOException {
