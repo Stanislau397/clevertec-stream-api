@@ -6,6 +6,7 @@ import by.sologub.model.Flower;
 import by.sologub.model.House;
 import by.sologub.model.Person;
 import by.sologub.service.CarService;
+import by.sologub.service.FlowerService;
 import by.sologub.util.Util;
 
 import java.io.IOException;
@@ -16,6 +17,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import static by.sologub.validator.FlowerValidator.isVaseMadeOfAluminum;
+import static by.sologub.validator.FlowerValidator.isVaseMadeOfGlass;
+import static by.sologub.validator.FlowerValidator.isVaseMadeOfSteel;
+import static by.sologub.validator.FlowerValidator.nameContainsC;
+import static by.sologub.validator.FlowerValidator.nameStartsWithS;
 import static by.sologub.validator.PersonValidator.isAgeGreaterOrEqual18;
 import static by.sologub.validator.PersonValidator.isAgeLessOrEqual27;
 import static by.sologub.validator.PersonValidator.isAgelessThan18;
@@ -208,6 +214,16 @@ public class Main {
 
     private static void task15() throws IOException {
         List<Flower> flowers = Util.getFlowers();
-        //        Продолжить...
+        FlowerService flowerService = new FlowerService();
+        double flowersMaintenanceCost = flowers.stream()
+                .sorted(Comparator.comparing(Flower::getOrigin).reversed()
+                        .thenComparingInt(Flower::getPrice)
+                        .thenComparing(Comparator.comparingDouble(Flower::getWaterConsumptionPerDay).reversed()))
+                .filter(nameStartsWithS.and(nameContainsC))
+                .filter(Flower::isShadePreferred)
+                .filter(isVaseMadeOfGlass.or(isVaseMadeOfAluminum).or(isVaseMadeOfSteel))
+                .mapToDouble(flowerService::calculateTotalCostOfPlantsMaintenance)
+                .sum();
+        System.out.println(flowersMaintenanceCost);
     }
 }
