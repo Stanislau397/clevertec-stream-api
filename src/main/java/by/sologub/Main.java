@@ -147,7 +147,7 @@ public class Main {
         List<Person> people = Util.getPersons();
         people.stream()
                 .filter(person -> "Male".equals(person.getGender()))
-                .filter(person -> isAgeGreaterOrEqual18.and(isAgeLessOrEqual27).test(person))
+                .filter(isAgeGreaterOrEqual18.and(isAgeLessOrEqual27))
                 .sorted(Comparator.comparingInt(Person::getRecruitmentGroup))
                 .limit(200)
                 .forEach(System.out::println);
