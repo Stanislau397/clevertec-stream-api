@@ -5,12 +5,16 @@ import by.sologub.model.Car;
 import by.sologub.model.Flower;
 import by.sologub.model.House;
 import by.sologub.model.Person;
+import by.sologub.service.CarService;
 import by.sologub.util.Util;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 import static by.sologub.validator.PersonValidator.isAgeGreaterOrEqual18;
 import static by.sologub.validator.PersonValidator.isAgeLessOrEqual27;
@@ -170,8 +174,36 @@ public class Main {
     }
 
     private static void task14() throws IOException {
-        List<Car> cars = Util.getCars();
-        //        Продолжить...
+        List<Car> cars = new ArrayList<>(Util.getCars());
+        CarService carService = new CarService();
+
+        Map<String, List<Car>> carsMap = new LinkedHashMap<>();
+        carsMap.put("Turkmenistan", carService.findTurkmenistanCars(cars));
+        carsMap.put("Uzbekistan", carService.findUzbekistanCars(cars));
+        carsMap.put("Kazakhstan", carService.findKazakhstanCars(cars));
+        carsMap.put("Kyrgyzstan", carService.findKyrgyzstanCars(cars));
+        carsMap.put("Russian", carService.findRussianCars(cars));
+        carsMap.put("Mongolia", carService.findMongolianCars(cars));
+
+        Map<String, Double> transportationCost = carsMap.entrySet()
+                .stream()
+                .collect(Collectors.toMap(Map.Entry::getKey,
+                        map -> map.getValue()
+                                .stream()
+                                .mapToDouble(carService::calculateTransportationCost)
+                                .sum(),
+                        (v1, v2) -> v1,
+                        LinkedHashMap::new));
+
+        double profit = carsMap.values()
+                .stream()
+                .flatMap(List::stream)
+                .mapToDouble(carService::calculateProfit)
+                .sum();
+
+        System.out.println("Transportation cost for each country: ");
+        transportationCost.forEach((k, v) -> System.out.println(k + ": " + v));
+        System.out.println("Profit made: " + profit);
     }
 
     private static void task15() throws IOException {
