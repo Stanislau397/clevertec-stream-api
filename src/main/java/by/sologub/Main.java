@@ -19,7 +19,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-import static by.sologub.validator.FlowerValidator.flowerPattern;
+import static by.sologub.validator.FlowerValidator.flowerNamePattern;
 import static by.sologub.validator.FlowerValidator.isVaseMadeOfAluminum;
 import static by.sologub.validator.FlowerValidator.isVaseMadeOfGlass;
 import static by.sologub.validator.FlowerValidator.isVaseMadeOfSteel;
@@ -223,7 +223,7 @@ public class Main {
                 .sorted(Comparator.comparing(Flower::getOrigin).reversed()
                         .thenComparingInt(Flower::getPrice)
                         .thenComparing(Comparator.comparingDouble(Flower::getWaterConsumptionPerDay).reversed()))
-                .filter(flower -> flowerPattern.matcher(flower.getCommonName().toLowerCase()).matches())
+                .filter(flower -> flowerNamePattern.matcher(flower.getCommonName().toLowerCase()).matches())
                 .filter(Flower::isShadePreferred)
                 .filter(isVaseMadeOfGlass.or(isVaseMadeOfAluminum).or(isVaseMadeOfSteel))
                 .mapToDouble(flowerService::calculateTotalCostOfPlantsMaintenance)

@@ -5,7 +5,6 @@ import by.sologub.model.Flower;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 
-
 public class FlowerService {
 
     public Double calculateTotalCostOfPlantsMaintenance(Flower flower) {
