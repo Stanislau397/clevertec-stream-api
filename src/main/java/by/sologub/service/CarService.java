@@ -6,10 +6,10 @@ import java.util.List;
 
 public class CarService {
 
-
     public List<Car> findTurkmenistanCars(List<Car> cars) {
         List<Car> turkmenistanCars = cars.stream()
-                .filter(car -> "Jaguar".equals(car.getCarMake()))
+                .filter(car -> "Jaguar".equals(car.getCarMake())
+                        || "White".equals(car.getColor()))
                 .toList();
         cars.removeAll(turkmenistanCars);
         return turkmenistanCars;
@@ -17,11 +17,12 @@ public class CarService {
 
     public List<Car> findUzbekistanCars(List<Car> cars) {
         List<Car> uzbekistanCars = cars.stream()
-                .filter(car -> car.getMass() < 1500 && ("BMW".equals(car.getCarMake())
+                .filter(car -> car.getMass() < 1500)
+                .filter(car -> "BMW".equals(car.getCarMake())
                         || "Lexus".equals(car.getCarMake())
                         || "Chrysler".equals(car.getCarMake())
                         || "Toyota".equals(car.getCarMake())
-                ))
+                )
                 .toList();
         cars.removeAll(uzbekistanCars);
         return uzbekistanCars;
@@ -29,10 +30,8 @@ public class CarService {
 
     public List<Car> findKazakhstanCars(List<Car> cars) {
         List<Car> kazakhstanCars = cars.stream()
-                .filter(car -> car.getMass() > 4000 && (
-                        "GMC".equals(car.getCarMake())
-                                || "Dodge".equals(car.getCarMake())
-                ))
+                .filter(car -> "Black".equals(car.getColor()) && car.getMass() > 4000
+                        || "GMC".equals(car.getCarMake()) || "Dodge".equals(car.getCarMake()))
                 .toList();
         cars.removeAll(kazakhstanCars);
         return kazakhstanCars;
@@ -60,7 +59,7 @@ public class CarService {
     public List<Car> findRussianCars(List<Car> cars) {
         List<Car> russianCars = cars.stream()
                 .filter(car -> car.getPrice() > 40000
-                        && !"Yellow".equals(car.getColor())
+                        || !"Yellow".equals(car.getColor())
                         && !"Red".equals(car.getColor())
                         && !"Blue".equals(car.getColor())
                         && !"Green".equals(car.getColor()))
@@ -70,10 +69,10 @@ public class CarService {
     }
 
     public Double calculateTransportationCost(Car car) {
-        return (car.getMass() / 1000d) * 7.14d;
+        return (car.getMass() / 1000.0) * 7.14;
     }
 
     public Double calculateProfit(Car car) {
-        return car.getPrice() - (car.getMass() / 1000d) * 7.14d;
+        return car.getPrice() - (car.getMass() / 1000.0) * 7.14;
     }
 }
