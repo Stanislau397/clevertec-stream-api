@@ -1,6 +1,6 @@
-package by.sologub.validator;
+package by.kachan.validator;
 
-import by.sologub.model.Flower;
+import by.kachan.model.Flower;
 
 import java.util.function.Predicate;
 import java.util.regex.Pattern;

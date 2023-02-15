@@ -1,6 +1,6 @@
-package by.sologub.service;
+package by.kachan.service;
 
-import by.sologub.model.Flower;
+import by.kachan.model.Flower;
 
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
