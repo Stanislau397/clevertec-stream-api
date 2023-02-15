@@ -28,7 +28,7 @@ import static by.kachan.validator.PersonValidator.isAgeLessOrEqual27;
 import static by.kachan.validator.PersonValidator.isAgelessThan18;
 import static by.kachan.validator.PersonValidator.isRetiredMan;
 import static by.kachan.validator.PersonValidator.isRetiredWomen;
-import static by.kachan.validator.PersonValidator.others;
+import static by.kachan.validator.PersonValidator.isNotRetired;
 
 public class Main {
     public static void main(String[] args) throws IOException {
@@ -175,7 +175,7 @@ public class Main {
         houses.stream()
                 .filter(house -> !house.getBuildingType().equals("Hospital"))
                 .flatMap(house -> house.getPersonList().stream())
-                .filter(others)
+                .filter(isAgeGreaterOrEqual18.and(isNotRetired))
                 .forEach(people::add);
 
         people.stream()
