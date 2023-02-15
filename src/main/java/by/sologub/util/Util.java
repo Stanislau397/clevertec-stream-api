@@ -4,12 +4,12 @@ import by.sologub.model.Animal;
 import by.sologub.model.Car;
 import by.sologub.model.Flower;
 import by.sologub.model.House;
+import by.sologub.model.Movie;
 import by.sologub.model.Person;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JSR310Module;
-import lombok.SneakyThrows;
 
 import java.io.File;
 import java.io.IOException;
@@ -22,6 +22,7 @@ public class Util {
     public static final String recruitsDataFileName = "src\\main\\resources\\recruits.json";
     public static final String carsDataFileName = "src\\main\\resources\\cars.json";
     public static final String flowersDataFileName = "src\\main\\resources\\flowers.json";
+    public static final String moviesDataFileName = "src\\main\\resources\\movies.json";
     public static final SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
 
     public static List<Animal> getAnimals() throws IOException {
@@ -41,6 +42,11 @@ public class Util {
 
     public static List<Flower> getFlowers() throws IOException {
         return newMapper().readValue(new File(flowersDataFileName), new TypeReference<>() {
+        });
+    }
+
+    public static List<Movie> getMovies() throws IOException {
+        return newMapper().readValue(new File(moviesDataFileName), new TypeReference<>() {
         });
     }
 

@@ -4,12 +4,14 @@ import by.sologub.model.Animal;
 import by.sologub.model.Car;
 import by.sologub.model.Flower;
 import by.sologub.model.House;
+import by.sologub.model.Movie;
 import by.sologub.model.Person;
 import by.sologub.service.CarService;
 import by.sologub.service.FlowerService;
 import by.sologub.util.Util;
 
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.LinkedHashMap;
@@ -46,6 +48,7 @@ public class Main {
         task13();
         task14();
         task15();
+        task16();
     }
 
     private static void task1() throws IOException {
@@ -147,28 +150,28 @@ public class Main {
         List<Person> people = Util.getPersons();
         people.stream()
                 .filter(person -> "Male".equals(person.getGender()))
-                .filter(person -> isAgeGreaterOrEqual18.and(isAgeLessOrEqual27).test(person))
+                .filter(isAgeGreaterOrEqual18.and(isAgeLessOrEqual27))
                 .sorted(Comparator.comparingInt(Person::getRecruitmentGroup))
                 .limit(200)
                 .forEach(System.out::println);
     }
 
     private static void task13() throws IOException {
-        List<House> houses = new ArrayList<>(Util.getHouses());
+        List<House> houses1 = new ArrayList<>(Util.getHouses());
         List<Person> people = new ArrayList<>();
 
-        houses.stream()
+        houses1.stream()
                 .filter(house -> house.getBuildingType().equals("Hospital"))
                 .flatMap(house -> house.getPersonList().stream())
                 .forEach(people::add);
 
-        houses.stream()
+        houses1.stream()
                 .filter(house -> !house.getBuildingType().equals("Hospital"))
                 .flatMap(house -> house.getPersonList().stream())
                 .filter(isAgelessThan18.or(isRetiredWomen).or(isRetiredMan))
                 .forEach(people::add);
 
-        houses.stream()
+        houses1.stream()
                 .filter(house -> !house.getBuildingType().equals("Hospital"))
                 .flatMap(house -> house.getPersonList().stream())
                 .filter(others)
@@ -225,5 +228,23 @@ public class Main {
                 .mapToDouble(flowerService::calculateTotalCostOfPlantsMaintenance)
                 .sum();
         System.out.println(flowersMaintenanceCost);
+    }
+
+    private static void task16() throws IOException {
+        List<Movie> movies = Util.getMovies();
+        movies.stream()
+                .sorted(Comparator.comparing(Movie::getReleaseDate).reversed()
+                        .thenComparing(Movie::getTitle).reversed())
+                .filter(movie -> movie.getReleaseDate().isAfter(LocalDate.of(1990, 1, 1)))
+                .filter(movie -> "USA".equalsIgnoreCase(movie.getCountry()))
+                .collect(Collectors.groupingBy(Movie::getGenre,
+                        Collectors.summingDouble(movie -> movie.getWorldWideGross() - movie.getProductionBudget())))
+                .entrySet()
+                .stream()
+                .sorted(Map.Entry.<String, Double>comparingByValue().reversed())
+                .peek(System.out::println)
+                .max(Map.Entry.comparingByValue())
+                .map(Map.Entry::getKey)
+                .ifPresent(genre -> System.out.println("Most profitable genre is " + genre));
     }
 }
