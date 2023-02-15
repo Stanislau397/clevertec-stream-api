@@ -28,7 +28,7 @@ import static by.kachan.validator.PersonValidator.isAgeLessOrEqual27;
 import static by.kachan.validator.PersonValidator.isAgelessThan18;
 import static by.kachan.validator.PersonValidator.isRetiredMan;
 import static by.kachan.validator.PersonValidator.isRetiredWomen;
-import static by.kachan.validator.PersonValidator.others;
+import static by.kachan.validator.PersonValidator.isNotRetired;
 
 public class Main {
     public static void main(String[] args) throws IOException {
@@ -64,9 +64,9 @@ public class Main {
         List<Animal> animals = Util.getAnimals();
         animals.stream()
                 .filter(animal -> "Japanese".equals(animal.getOrigin()))
-                .peek(animal -> animal.setBread(animal.getBread().toUpperCase()))
-                .filter(animal -> "Female".equals(animal.getGender()))
-                .map(Animal::getBread)
+                .map(animal -> "Female".equals(animal.getGender())
+                        ? animal.getBread()
+                        : animal.getBread().toUpperCase())
                 .forEach(System.out::println);
     }
 
@@ -175,7 +175,7 @@ public class Main {
         houses.stream()
                 .filter(house -> !house.getBuildingType().equals("Hospital"))
                 .flatMap(house -> house.getPersonList().stream())
-                .filter(others)
+                .filter(isAgeGreaterOrEqual18.and(isNotRetired))
                 .forEach(people::add);
 
         people.stream()

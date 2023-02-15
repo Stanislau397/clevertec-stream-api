@@ -20,8 +20,7 @@ public class PersonValidator {
     public static final Predicate<Person> isRetiredMan = person -> person.getGender().equals("Male")
             && Period.between(person.getDateOfBirth(), LocalDate.now()).getYears() >= 63;
 
-    public static final Predicate<Person> others = person -> Period.between(person.getDateOfBirth(), LocalDate.now()).getYears() >= 18
-            && Period.between(person.getDateOfBirth(), LocalDate.now()).getYears() < 58;
+    public static final Predicate<Person> isNotRetired = person -> Period.between(person.getDateOfBirth(), LocalDate.now()).getYears() < 58;
 
     public static final Predicate<Person> isAgeGreaterOrEqual18 = person -> Period.between(person.getDateOfBirth(), LocalDate.now()).getYears() >= 18;
 
