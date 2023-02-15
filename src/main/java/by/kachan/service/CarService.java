@@ -1,6 +1,6 @@
-package by.sologub.service;
+package by.kachan.service;
 
-import by.sologub.model.Car;
+import by.kachan.model.Car;
 
 import java.util.List;
 

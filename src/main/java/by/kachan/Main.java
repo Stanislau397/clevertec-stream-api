@@ -1,14 +1,14 @@
-package by.sologub;
+package by.kachan;
 
-import by.sologub.model.Animal;
-import by.sologub.model.Car;
-import by.sologub.model.Flower;
-import by.sologub.model.House;
-import by.sologub.model.Movie;
-import by.sologub.model.Person;
-import by.sologub.service.CarService;
-import by.sologub.service.FlowerService;
-import by.sologub.util.Util;
+import by.kachan.model.Animal;
+import by.kachan.model.Car;
+import by.kachan.model.Flower;
+import by.kachan.model.House;
+import by.kachan.model.Movie;
+import by.kachan.model.Person;
+import by.kachan.service.CarService;
+import by.kachan.service.FlowerService;
+import by.kachan.util.Util;
 
 import java.io.IOException;
 import java.time.LocalDate;
@@ -19,16 +19,16 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-import static by.sologub.validator.FlowerValidator.flowerNamePattern;
-import static by.sologub.validator.FlowerValidator.isVaseMadeOfAluminum;
-import static by.sologub.validator.FlowerValidator.isVaseMadeOfGlass;
-import static by.sologub.validator.FlowerValidator.isVaseMadeOfSteel;
-import static by.sologub.validator.PersonValidator.isAgeGreaterOrEqual18;
-import static by.sologub.validator.PersonValidator.isAgeLessOrEqual27;
-import static by.sologub.validator.PersonValidator.isAgelessThan18;
-import static by.sologub.validator.PersonValidator.isRetiredMan;
-import static by.sologub.validator.PersonValidator.isRetiredWomen;
-import static by.sologub.validator.PersonValidator.others;
+import static by.kachan.validator.FlowerValidator.flowerNamePattern;
+import static by.kachan.validator.FlowerValidator.isVaseMadeOfAluminum;
+import static by.kachan.validator.FlowerValidator.isVaseMadeOfGlass;
+import static by.kachan.validator.FlowerValidator.isVaseMadeOfSteel;
+import static by.kachan.validator.PersonValidator.isAgeGreaterOrEqual18;
+import static by.kachan.validator.PersonValidator.isAgeLessOrEqual27;
+import static by.kachan.validator.PersonValidator.isAgelessThan18;
+import static by.kachan.validator.PersonValidator.isRetiredMan;
+import static by.kachan.validator.PersonValidator.isRetiredWomen;
+import static by.kachan.validator.PersonValidator.others;
 
 public class Main {
     public static void main(String[] args) throws IOException {

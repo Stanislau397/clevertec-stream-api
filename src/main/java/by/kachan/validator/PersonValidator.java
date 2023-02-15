@@ -1,6 +1,6 @@
-package by.sologub.validator;
+package by.kachan.validator;
 
-import by.sologub.model.Person;
+import by.kachan.model.Person;
 
 import java.time.LocalDate;
 import java.time.Period;
