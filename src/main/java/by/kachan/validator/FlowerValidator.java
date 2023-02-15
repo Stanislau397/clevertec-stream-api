@@ -1,6 +1,6 @@
-package by.sologub.validator;
+package by.kachan.validator;
 
-import by.sologub.model.Flower;
+import by.kachan.model.Flower;
 
 import java.util.function.Predicate;
 import java.util.regex.Pattern;
@@ -11,7 +11,7 @@ public class FlowerValidator {
 
     }
 
-    public static final Pattern flowerPattern = Pattern.compile(".*s[\\s\\S]*?c.*");
+    public static final Pattern flowerNamePattern = Pattern.compile(".*s[\\s\\S]*?c.*");
 
     public static final Predicate<Flower> isVaseMadeOfGlass = flower -> flower.getFlowerVaseMaterial().contains("Glass");
     public static final Predicate<Flower> isVaseMadeOfAluminum = flower -> flower.getFlowerVaseMaterial().contains("Aluminum");

@@ -1,11 +1,11 @@
-package by.sologub.util;
+package by.kachan.util;
 
-import by.sologub.model.Animal;
-import by.sologub.model.Car;
-import by.sologub.model.Flower;
-import by.sologub.model.House;
-import by.sologub.model.Movie;
-import by.sologub.model.Person;
+import by.kachan.model.Animal;
+import by.kachan.model.Car;
+import by.kachan.model.Flower;
+import by.kachan.model.House;
+import by.kachan.model.Movie;
+import by.kachan.model.Person;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;

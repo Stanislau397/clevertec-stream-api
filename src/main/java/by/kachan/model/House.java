@@ -1,4 +1,4 @@
-package by.sologub.model;
+package by.kachan.model;
 
 import java.util.List;
 
