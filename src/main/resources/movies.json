@@ -1,0 +1,101 @@
+[
+  {
+    "movieId": 1,
+    "title": "Avatar",
+    "productionBudget": 10000000,
+    "worldWideGross": 20000000,
+    "genre": "Fantasy",
+    "releaseDate": "2015-10-11",
+    "country": "USA"
+  },
+  {
+    "movieId": 2,
+    "title": "Seven Psychopaths",
+    "productionBudget": 15000000,
+    "worldWideGross": 32226000,
+    "genre": "Comedy",
+    "releaseDate": "2012-09-10",
+    "country": "Great Britain"
+  },
+  {
+    "movieId": 3,
+    "title": "The Green Mile",
+    "productionBudget": 60000000,
+    "worldWideGross": 300000000,
+    "genre": "Drama",
+    "releaseDate": "1999-10-11",
+    "country": "USA"
+  },
+  {
+    "movieId": 4,
+    "title": "Schindler's List",
+    "productionBudget": 22000000,
+    "worldWideGross": 96065768,
+    "genre": "Drama",
+    "releaseDate": "1993-10-11",
+    "country": "USA"
+  },
+  {
+    "movieId": 6,
+    "title": "Interstellar",
+    "productionBudget": 165000000,
+    "worldWideGross": 677896797,
+    "genre": "Fantasy",
+    "releaseDate": "2014-10-11",
+    "country": "USA"
+  },
+  {
+    "movieId": 7,
+    "title": "Back to the Future",
+    "productionBudget": 19000000,
+    "worldWideGross": 381888732,
+    "genre": "Fantasy",
+    "releaseDate": "1985-10-11",
+    "country": "USA"
+  },
+  {
+    "movieId": 8,
+    "title": "Pulp Fiction",
+    "productionBudget": 8000000,
+    "worldWideGross": 213928762,
+    "genre": "Criminal",
+    "releaseDate": "1994-10-11",
+    "country": "USA"
+  },
+  {
+    "movieId": 9,
+    "title": "Fight Club",
+    "productionBudget": 63000000,
+    "worldWideGross": 100853753,
+    "genre": "Thriller",
+    "releaseDate": "1999-10-11",
+    "country": "USA"
+  },
+  {
+    "movieId": 10,
+    "title": "Sen to Chihiro no kamikakushi",
+    "productionBudget": 19000000,
+    "worldWideGross": 355467076,
+    "genre": "Adventure",
+    "releaseDate": "2001-10-11",
+    "country": "USA"
+  },
+  {
+    "movieId": 11,
+    "title": "The Dark Knight",
+    "productionBudget": 185000000,
+    "worldWideGross": 533345358,
+    "genre": "Action",
+    "releaseDate": "2008-07-13",
+    "country": "USA"
+  },
+  {
+    "movieId": 12,
+    "title": "Gladiator",
+    "productionBudget": 103000000,
+    "worldWideGross": 460576532,
+    "genre": "Action",
+    "releaseDate": "1999-10-11",
+    "country": "USA"
+  }
+]
