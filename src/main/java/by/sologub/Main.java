@@ -234,7 +234,7 @@ public class Main {
         List<Movie> movies = Util.getMovies();
         movies.stream()
                 .sorted(Comparator.comparing(Movie::getReleaseDate).reversed()
-                        .thenComparing(Movie::getTitle))
+                        .thenComparing(Movie::getTitle).reversed())
                 .filter(movie -> movie.getReleaseDate().isAfter(LocalDate.of(1990, 1, 1)))
                 .filter(movie -> "USA".equalsIgnoreCase(movie.getCountry()))
                 .collect(Collectors.groupingBy(Movie::getGenre,
