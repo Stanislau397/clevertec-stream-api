@@ -19,11 +19,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import static by.sologub.validator.FlowerValidator.flowerPattern;
 import static by.sologub.validator.FlowerValidator.isVaseMadeOfAluminum;
 import static by.sologub.validator.FlowerValidator.isVaseMadeOfGlass;
 import static by.sologub.validator.FlowerValidator.isVaseMadeOfSteel;
-import static by.sologub.validator.FlowerValidator.nameContainsC;
-import static by.sologub.validator.FlowerValidator.nameStartsWithS;
 import static by.sologub.validator.PersonValidator.isAgeGreaterOrEqual18;
 import static by.sologub.validator.PersonValidator.isAgeLessOrEqual27;
 import static by.sologub.validator.PersonValidator.isAgelessThan18;
@@ -117,7 +116,9 @@ public class Main {
         animals.stream()
                 .sorted(Comparator.comparing(Animal::getBread))
                 .limit(100)
-                .forEach(System.out::println);
+                .mapToInt(Animal::getAge)
+                .max()
+                .ifPresent(System.out::println);
     }
 
     private static void task9() throws IOException {
@@ -157,21 +158,21 @@ public class Main {
     }
 
     private static void task13() throws IOException {
-        List<House> houses1 = new ArrayList<>(Util.getHouses());
+        List<House> houses = new ArrayList<>(Util.getHouses());
         List<Person> people = new ArrayList<>();
 
-        houses1.stream()
+        houses.stream()
                 .filter(house -> house.getBuildingType().equals("Hospital"))
                 .flatMap(house -> house.getPersonList().stream())
                 .forEach(people::add);
 
-        houses1.stream()
+        houses.stream()
                 .filter(house -> !house.getBuildingType().equals("Hospital"))
                 .flatMap(house -> house.getPersonList().stream())
                 .filter(isAgelessThan18.or(isRetiredWomen).or(isRetiredMan))
                 .forEach(people::add);
 
-        houses1.stream()
+        houses.stream()
                 .filter(house -> !house.getBuildingType().equals("Hospital"))
                 .flatMap(house -> house.getPersonList().stream())
                 .filter(others)
@@ -222,7 +223,7 @@ public class Main {
                 .sorted(Comparator.comparing(Flower::getOrigin).reversed()
                         .thenComparingInt(Flower::getPrice)
                         .thenComparing(Comparator.comparingDouble(Flower::getWaterConsumptionPerDay).reversed()))
-                .filter(nameStartsWithS.and(nameContainsC))
+                .filter(flower -> flowerPattern.matcher(flower.getCommonName().toLowerCase()).matches())
                 .filter(Flower::isShadePreferred)
                 .filter(isVaseMadeOfGlass.or(isVaseMadeOfAluminum).or(isVaseMadeOfSteel))
                 .mapToDouble(flowerService::calculateTotalCostOfPlantsMaintenance)
